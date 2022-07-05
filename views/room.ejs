@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,
+    initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gmeet Clone</title>
+    <link rel="stylesheet" href="./room.css">
+    <script src="https://kit.fontawesome.com/809eb1025b.js" crossorigin="anonymous"></script>
+    <script>
+      const ROOM_ID = "<%= roomId %>";
+      const userName = "<%= username %>";
+    </script>
+    <script src="/socket.io/socket.io.js" ></script>
+    <script src="https://unpkg.com/peerjs@1.4.5/dist/peerjs.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left-section">
+        <div class="videos-section">
+          <canvas class="canvas" width="1150" height="760"></canvas>
+          <div id="video-grid"></div>
+        </div>
+        <div class="controls-section">
+          <div class="controls-section-block">
+            <div onclick="MuteorUnmute()"class="controls-section-button mute_button">
+              <i class="fa-solid fa-microphone"></i>
+              <span>Mute</span>
+            </div>
+            <div onclick="OnorOffvideo()"class="controls-section-button stop_video_button">
+              <i class="fa-solid fa-video"></i>
+              <span>Stop Video</span>
+            </div>
+          </div>
+          <div class="controls-section-block">
+            <div onclick="shareScreenorNot()" class="controls-section-button screen_share_button">
+              <i class="fa-solid fa-arrow-up-from-bracket"></i>
+              <span>Share Screen</span>
+            </div>
+            <div onclick="WhiteBoardorNot()" class="controls-section-button white_board_button">
+              <i class="fa-solid fa-chalkboard"></i>
+              <span>WhiteBoard</span>
+            </div>
+          </div>
+          <div class="controls-section-block">
+            <div class="controls-section-button">
+              <a href="http://localhost:3000/success">
+                <button class="leave-meeting">Leave Meeting</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="right-section">
+        <div class="right-header">
+          <h4>Chat</h4>
+        </div>
+        <div class="chat_window">
+          <ul class="messages">
+
+          </ul>
+        </div>
+        <div class="message_container">
+          <input type="text" id="chat_message" placeholder="Type message here...">
+        </div>
+      </div>
+    </div>
+    <script src="room.js"></script>
+  </body>
+</html>

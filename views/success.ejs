@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Gmeet Clone</title>
+  <link rel="stylesheet" href="/success.css">
+  <script>
+    const userInfo = "<%= userinfo %>";
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="top-section">
+      <div class="top-header">
+        <p>Welcome <%= userinfo.displayName %></p>
+      </div>
+      <div class="Logout">
+        <a href="http://localhost:3000/logout">
+          <button type="button" class="logoutButton" name="logoutButton">Logout</button>
+        </a>
+      </div>
+    </div>
+    <div class="main-section">
+      <p class="main-header">Video Chat Web App for free</p>
+      <p class="main-info">We provide premium meetings with amazing features, free for all</p>
+      <div class="buttons">
+        <div class="NewMeeting">
+            <a href="http://localhost:3000/startmeeting">
+              <button class="NewMeetingButton" type="button">Start Meeting</button>
+            </a>
+        </div>
+        <div class="schedule_Meeting_div">
+          <a href="http://localhost:3000/schedulemeeting">
+            <button class="scheduleMeetingButton" type="button">Schedule Meeting</button>
+          </a>
+        </div>
+      </div>
+      <div class="joinMeetingform">
+        <form action="/success" method="post">
+          <div class="joinMeetingdiv">
+            <div class="form-div">
+              <input type="text" class="meetingid" name="meetingid" placeholder="Enter Meeting ID">
+            </div>
+            <div class="buttonDiv">
+              <button type="submit" class="joinMeetingButton">Join</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
