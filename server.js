@@ -8,10 +8,10 @@ const passport = require('passport');
 const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
+const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const schedule = require('node-schedule');
-require('/Users/meghanadhpulivarthi/Desktop/Gmeet/passport-setup.js');
-const Email = require('/Users/meghanadhpulivarthi/Desktop/Gmeet/sendEmail.js');
+const Email = require(path.resolve(__dirname, "./sendEmail.js"));
 
 app.set('view engine', 'ejs');
 app.use(morgan('dev'));
@@ -25,10 +25,32 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(urlencodedParser);
+
+//Used to stuff the profile info into a cookie
+passport.serializeUser(function(user, done){
+  done(null, user);
+})
+//Used to decode the recieved cookie and persist session
+passport.deserializeUser(function(user, done){
+  done(null, user);
+})
+passport.use(new GoogleStrategy({
+    clientID:"177101401323-ddg8oa9r6rk4kad9f992hhunansqni7v.apps.googleusercontent.com",
+    clientSecret: "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",
+    callbackURL: "http://localhost:3000/auth/google/callback",
+    passReqToCallback   : true
+  },
+  function(request, accessToken, refreshToken, profile, done) {
+    //profile data is passed to serializeUser
+    return done(null, profile);
+  }
+));
+
 function isLoggedin(req, res, next){
   if(req.user){next();}
   else{res.redirect('/');}
 }
+
 
 app.get('/', (req, res) => {
   if(!req.user){res.render('homepage');}

@@ -3,9 +3,8 @@ const {google} = require('googleapis');
 const ClIENT_ID = "305399775006-svr99f488q9s5o3ml59i7ieoglioipgr.apps.googleusercontent.com";
 const CLIENT_SECRET = "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";
 const REDIRECT_URL = "https://developers.google.com/oauthplayground";
-const REFRESH_TOKEN = "1//045Bkm935WxnZCgYIARAAGAQSNwF-L9IrD4ixigcLj3l1__bR6NJZ3HdwyxA6HHDGl2tC1OLpRykIczPSByucJssbAa9XaOir5Cs";
+const REFRESH_TOKEN = "1//04JnoyM0Y2krGCgYIARAAGAQSNwF-L9Ir_gP5HQhJ3xtDnkbXwJKVQRXq0E65gOWQhCNRIbNoRTpuZ-5KgxQdyICSCi9o7ip7jiw";
 const oAuth2Client = new google.auth.OAuth2(ClIENT_ID, CLIENT_SECRET, REDIRECT_URL);
-
 oAuth2Client.setCredentials({refresh_token: REFRESH_TOKEN});
 const sendEmail = (mailOptions) => {
   const accessToken = oAuth2Client.getAccessToken();

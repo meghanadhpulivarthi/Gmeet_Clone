@@ -140,7 +140,6 @@ const connectToNewUser= (userId, stream, isscreen) => {
   video.controls = true;
   if(isscreen){
     video.setAttribute('class', 'screen');
-    video.controls = true;
   }
   else{video.setAttribute('class', 'notascreen');}
   call.on('stream', userVideoStream => {
