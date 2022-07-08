@@ -5,7 +5,7 @@
   "main": "new.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +23,7 @@
     "multer": "^1.4.5-lts.1",
     "node-schedule": "^2.1.0",
     "nodemailer": "^6.7.5",
+    "nodemon": "^2.0.19",
     "passport": "^0.6.0",
     "passport-google-oauth2": "^0.2.0",
     "passport-session": "^1.0.2",
