@@ -41,6 +41,16 @@ body{
   flex-direction: column;
   justify-content: space-between;
 }
+.main_right{
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.back_div{
+  display: flex;
+  justify-content: flex-end;
+}
 .meetingSubmitButton{
   margin: 50px 0px;
   padding: 5px;
@@ -104,4 +114,14 @@ body{
   color: #FFFFFF;
   cursor: pointer;
   margin-top: 16px;
+}
+.back_button{
+  margin: 50px 0px;
+  padding: 5px;
+  border: 2px solid #3477eb;
+  background-color: #3477eb;
+  border-radius: 5px;
+  font-size: 26px;
+  color: #FFFFFF;
+  cursor: pointer;
 }

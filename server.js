@@ -8,39 +8,14 @@ const passport = require('passport');
 const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
-const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
-const schedule = require('node-schedule');
-const nodemailer = require('nodemailer');
-const {google} = require('googleapis');
-const ClIENT_ID = "305399775006-svr99f488q9s5o3ml59i7ieoglioipgr.apps.googleusercontent.com";
-const CLIENT_SECRET = "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";
-const REDIRECT_URL = "https://developers.google.com/oauthplayground";
-const REFRESH_TOKEN = "1//04JnoyM0Y2krGCgYIARAAGAQSNwF-L9Ir_gP5HQhJ3xtDnkbXwJKVQRXq0E65gOWQhCNRIbNoRTpuZ-5KgxQdyICSCi9o7ip7jiw";
-const oAuth2Client = new google.auth.OAuth2(ClIENT_ID, CLIENT_SECRET, REDIRECT_URL);
-oAuth2Client.setCredentials({refresh_token: REFRESH_TOKEN});
-const sendEmail = (mailOptions) => {
-  const accessToken = oAuth2Client.getAccessToken();
-  const transport = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      type: 'OAuth2',
-      user: 'meghanadh27@gmail.com',
-      clientId: ClIENT_ID,
-      clientSecret: CLIENT_SECRET,
-      refreshToken: REFRESH_TOKEN,
-      accessToken: accessToken
-    }
-  })
-  transport.sendMail(mailOptions, (error, info) => {
-    if(error){console.log(error);}
-    else{console.log('Email Send: ' + info.response);}
-  })
-}
+const schedule = require('node-schedule')
 
 app.set('view engine', 'ejs');
 app.use(morgan('dev'));
 app.use(express.static('public'));
+require('./passport-setup.js');
+const Email = require('./sendEmail.js');
 
 app.use(session({
   secret: 'SECRET',
@@ -50,26 +25,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(urlencodedParser);
-
-//Used to stuff the profile info into a cookie
-passport.serializeUser(function(user, done){
-  done(null, user);
-})
-//Used to decode the recieved cookie and persist session
-passport.deserializeUser(function(user, done){
-  done(null, user);
-})
-passport.use(new GoogleStrategy({
-    clientID:"177101401323-ddg8oa9r6rk4kad9f992hhunansqni7v.apps.googleusercontent.com",
-    clientSecret: "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",
-    callbackURL: "http://localhost:3000/auth/google/callback",
-    passReqToCallback   : true
-  },
-  function(request, accessToken, refreshToken, profile, done) {
-    //profile data is passed to serializeUser
-    return done(null, profile);
-  }
-));
 
 function isLoggedin(req, res, next){
   if(req.user){next();}
